@@ -65,5 +65,42 @@ class NumberProcessor:
             even_numbers (list): List of even numbers
             odd_numbers (list): List of odd numbers
         """
+        try:
+            with open(self.even_filename, 'w') as even_file:
+                for num in even_numbers:
+                    even_file.write(f"{num}\n")
 
-    
+            with open(self.odd_filename, 'w') as odd_file:
+                for num in odd_numbers:
+                    odd_file.write(f"{num}\n")
+
+            print(f"Successfully wrote {len(even_numbers)} even numbers to {self.even_filename}")
+            print(f"Successfully wrote {len(odd_numbers)} odd numbers to {self.odd_filename}")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+        def process(self):
+            """
+                    Main processing method that orchestrates the entire operation
+
+                    Returns:
+                        bool: True if successful, False otherwise
+                    """
+            if not self.read_numbers():
+                return False
+
+            even_numbers, odd_numbers = self.separate_numbers()
+            self.write_numbers_to_files(even_numbers, odd_numbers)
+
+            print(f"\nSummary:")
+            print(f"Total numbers read: {len(self.numbers)}")
+            print(f"Even numbers: {len(even_numbers)}")
+            print(f"Odd numbers: {len(odd_numbers)}")
+
+            return True
+
+        if __name__ == "__main__":
+            processor = NumberProcessor("numbers.txt", "even.txt", "odd.txt")
+
+            processor.process()
