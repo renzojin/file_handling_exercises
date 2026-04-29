@@ -33,4 +33,37 @@ class NumberProcessor:
                         except ValueError:
                             print(f"Warning: '{num_str}' is not a valid integer, skipping...")
 
-            
+            if len(self.numbers) != 20:
+                print(f"Warning: Expected 20 numbers but found {len(self.numbers)}")
+
+            return True
+
+        except FileNotFoundError:
+            print(f"Error: {self.input_filename} not found")
+            return False
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
+
+    def separate_numbers(self):
+        """
+        Separate numbers into even and odd lists
+
+        Returns:
+            tuple: (even_numbers, odd_numbers)
+        """
+        even_numbers = [num for num in self.numbers if num % 2 == 0]
+        odd_numbers = [num for num in self.numbers if num % 2 != 0]
+
+        return even_numbers, odd_numbers
+
+    def write_numbers_to_files(self, even_numbers, odd_numbers):
+        """
+        Write even and odd numbers to their respective files
+
+        Args:
+            even_numbers (list): List of even numbers
+            odd_numbers (list): List of odd numbers
+        """
+
+    
